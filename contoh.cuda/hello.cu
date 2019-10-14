@@ -7,8 +7,14 @@ __global__ void cuda_hello(){
 }
 
 int main() {
+<<<<<<< HEAD
     cuda_hello<<<1,1>>>();
     cudaDeviceReset();
 	 
+=======
+    cuda_hello<<<1,1>>>(); 
+    cudaDeviceSynchronize();
+    cudaDeviceReset();
+>>>>>>> b3ed746430a99b81299d328a171dbd11bd1df781
     return 0;
 }
