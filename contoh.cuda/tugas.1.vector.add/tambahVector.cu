@@ -60,7 +60,7 @@ int main(void)
 	
 	std::cout << "Peluncuran kernel Cuda dengan ukuran  " << blocks_per_grid_ << " block  " << threads_per_block_ << " threads\n";
   	
-	tambahVector<<<block, grid>>>(d_A_,d_B_,d_C_,kJumlahElemen);
+	//tambahVector<<<???, ???>>>(??,??,??,??);
 	cudaError_t err_ = cudaGetLastError();
   	if (err_ != cudaSuccess)
   	{
