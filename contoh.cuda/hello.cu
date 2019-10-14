@@ -8,5 +8,7 @@ __global__ void cuda_hello(){
 
 int main() {
     cuda_hello<<<1,1>>>(); 
+    cudaDeviceSynchronize();
+    cudaDeviceReset();
     return 0;
 }
