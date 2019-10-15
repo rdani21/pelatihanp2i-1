@@ -16,13 +16,35 @@ void dotProduct(
     	__shared__ float cache[ BLOCK_SIZE ];
 	// caching
     	int idx_ = blockIdx.x * blockDim.x + threadIdx.x;
-	
+	//block dim 256 block
+	//block idx is index blok
+	//thread id ke x
+	//idx is indeksnya data
+
+	cache[threadIdx.x]=cVectorA[idx_]*cVectorB[idx_];
     	__syncthreads(); 
 
 	// gunakan idx_ untuk mentrace ukuran block
+//	int hasil=0;
+
+	int ida = BLOCK_SIZE/2;
 	
+	while (ida > 0) {
+		if(threadIdx.x<ida){
+			cache[threadIdx.x]= cache[threadIdx.x]+cache[ida+threadIdx.x];
+		}
+    		__syncthreads(); 
+		ida = ida/2;
+	}
+//	if(threadIdx.x)>0{
+	//	for(int i=0;i<BLOCK_SIZE;i++){
+	//		cache[0]+=cache[i];
+	//	}
+//	}
 	//hasil akhir pada cache[0]
-	if (threadIdx.x == 0) dotProductSebagian[blockIdx.x] = cache[0];
+	if(threadIdx.x == 0) {
+		dotProductSebagian[blockIdx.x] = cache[0];
+	}
 }
 
 // fungsi main untuk panggil kernel
